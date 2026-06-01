@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siddhant Hemagire | Portfolio</title>
+    <style>
+        :root {
+            --bg-main: #070a13;
+            --bg-card: #0d1527;
+            --bg-nav: rgba(13, 21, 39, 0.8);
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent-blue: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --border-color: #1e293b;
+            --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-stack);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--bg-nav);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 10%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.05em;
+        }
+
+        .logo span {
+            color: var(--accent-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Container & Global Layout */
+        section {
+            padding: 6rem 10% 4rem 10%;
+            min-height: auto;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--accent-blue);
+            margin: 0.75rem auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Hero Section (No Image Layout) */
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            padding-top: 5rem;
+            position: relative;
+            background: radial-gradient(circle at 50% 40%, var(--accent-glow) 0%, transparent 60%);
+        }
+
+        .hero-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        #home h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #home p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-blue);
+            color: var(--bg-main);
+            padding: 0.85rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(56, 189, 248, 0.4);
+        }
+
+        /* About & Education */
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            text-align: center;
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .timeline-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        .timeline-card:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-card h4 {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-grade {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .skill-group {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.75rem;
+            border-radius: 12px;
+        }
+
+        .skill-group h3 {
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+        }
+
+        .project-header h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tech {
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .project-card ul li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.25rem;
+        }
+
+        .project-card ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        .project-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .project-link:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Contact */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .contact-item {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .contact-item h4 {
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item p {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav { padding: 1.25rem 5%; }
+            .nav-links { display: none; } /* Simplified for single page mobile */
+            section { padding: 5rem 5% 3rem 5%; }
+            #home h1 { font-size: 2.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">SIDDHANT<span></span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About & Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home/Hero Section -->
+    <section id="home">
+        <div class="hero-badge">COMPUTER SCIENCE ENGINEER</div>
+        <h1>Siddhant Hemagire</h1>
+        <p>Transforming complex architectural logic into high-efficiency software components. Specializing in systems architecture, concurrent computing, and robust applications.</p>
+        <a href="#projects" class="btn">View Engineering Projects</a>
+    </section>
+
+    <!-- About & Education Section -->
+    <section id="about">
+        <h2 class="section-title">About & Education</h2>
+        <div class="about-container">
+            <p>I am a computer science student driven by system performance and software scaling paradigms. Through rigorous academics and project-driven cycles, I focus on constructing highly dependable technical solutions from structural foundations up to presentation frameworks.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-card">
+                <div class="timeline-date">Aug. 2024</div>
+                <h3>COEP Technological University</h3>
+                <h4>B.Tech in Computer Science and Engineering</h4>
+                <div class="timeline-grade">CGPA: 8.30 / 10.00</div>
+            </div>
+            <div class="timeline-card">
+                <div class="timeline-date">March 2024</div>
+                <h3>Shraddha College</h3>
+                <h4>HSC (Science) — Ichalkaranji</h4>
+                <div class="timeline-grade">Percentage: 88.67%</div>
+            </div>
+            <div class="timeline-card">
+                <div class="timeline-date">April 2022</div>
+                <h3>Jantara Highschool</h3>
+                <h4>SSC — Jaysingpur</h4>
+                <div class="timeline-grade">Percentage: 98.60%</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Technical Competencies</h2>
+        <div class="skills-grid">
+            <div class="skill-group">
+                <h3>Languages</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">C</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">R Language</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <h3>Core Engineering</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">DSA</span>
+                    <span class="skill-tag">OOP Concepts</span>
+                    <span class="skill-tag">Multithreading</span>
+                    <span class="skill-tag">Synchronization</span>
+                    <span class="skill-tag">File Handling</span>
+                    <span class="skill-tag">Problem Solving</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <h3>Web Architecture</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Responsive Web Design</span>
+                    <span class="skill-tag">DOM Manipulation</span>
+                    <span class="skill-tag">Frontend Development</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <h3>Tools & Environments</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Git & GitHub</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">LaTeX</span>
+                    <span class="skill-tag">Ubuntu Linux</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engineering Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Engineering Portfolio</h2>
+        <div class="projects-grid">
+            
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-tech">C / DSA / File Handling</div>
+                    <h3>Tournament Management System</h3>
+                    <p>Console application managing structured athletic setups dynamically using algorithmic data organization.</p>
+                    <ul>
+                        <li>Implemented robust team registration and record layouts using Linked Lists.</li>
+                        <li>Designed scheduling logic using custom Binary Tree setups.</li>
+                        <li>Configured physical file handling to persist user records and scores.</li>
+                    </ul>
+                </div>
+                <a href="https://github.com/hemagiresidhant-ui/DSA-Tournament-Management-System" target="_blank" class="project-link">View Repository ↗</a>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-tech">Java / OOP / Concurrency</div>
+                    <h3>Movie Ticket Booking System</h3>
+                    <p>Object-oriented, thread-safe console interface processing transactional allocations concurrently.</p>
+                    <ul>
+                        <li>Managed parallel processes cleanly via Java Multithreading synchronization tools.</li>
+                        <li>Prevented allocation errors using structured custom exceptions.</li>
+                        <li>Packaged execution layers within modern modular application design blueprints.</li>
+                    </ul>
+                </div>
+                <a href="https://github.com/hemagiresidhant-ui/OOPS-Movie-Ticket-Booking-System" target="_blank" class="project-link">View Repository ↗</a>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-tech">HTML / CSS / Web Design</div>
+                    <h3>Event Management Webpage</h3>
+                    <p>Sleek web presentation interface handling responsive structures and custom interaction zones.</p>
+                    <ul>
+                        <li>Crafted semantic, clear navigation routing across layout categories.</li>
+                        <li>Deployed fully responsive mobile grids using structural flex grids.</li>
+                        <li>Optimized local image and asset loads for high rendering efficiency.</li>
+                    </ul>
+                </div>
+                <a href="https://github.com/hemagiresidhant-ui/BASIC-WEB-DEVELOPMENT-PROJECT" target="_blank" class="project-link">View Repository ↗</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <p>Feel free to reach out for project collaboration, technical roles, or academic discussions.</p>
+            <div class="contact-grid">
+                <a href="mailto:hemagiress24.comp@coeptech.ac.in" class="contact-item">
+                    <h4>Institutional Email</h4>
+                    <p>hemagiress24.comp@coeptech.ac.in</p>
+                </a>
+                <a href="tel:+918149955108" class="contact-item">
+                    <h4>Mobile Identity</h4>
+                    <p>+91 8149955108</p>
+                </a>
+                <div class="contact-item">
+                    <h4>Current Station</h4>
+                    <p>Pune, India</p>
+                </div>
+                <a href="https://github.com/hemagiresidhant-ui" target="_blank" class="contact-item">
+                    <h4>GitHub Engine</h4>
+                    <p>github.com/hemagiresidhant-ui</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Siddhant Hemagire. Built using semantic web components.</p>
+    </footer>
+
+</body>
+</html>
