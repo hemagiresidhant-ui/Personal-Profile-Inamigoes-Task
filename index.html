@@ -62,6 +62,7 @@
             display: flex;
             list-style: none;
             gap: 2rem;
+            transition: all 0.3s ease-in-out;
         }
 
         .nav-links a {
@@ -74,6 +75,27 @@
 
         .nav-links a:hover {
             color: var(--accent-blue);
+        }
+
+        /* Hamburger Menu Trigger Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle .bar {
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-primary);
+            transition: all 0.3s ease-in-out;
+            border-radius: 2px;
         }
 
         /* Container & Global Layout */
@@ -385,20 +407,74 @@
             margin-top: 5rem;
         }
 
-        /* Responsive Design */
+        /* Responsive Design & Mobile Overlay Configurations */
         @media (max-width: 768px) {
-            nav { padding: 1.25rem 5%; }
-            .nav-links { display: none; } /* Simplified for single page mobile */
-            section { padding: 5rem 5% 3rem 5%; }
-            #home h1 { font-size: 2.75rem; }
+            nav { 
+                padding: 1.25rem 5%; 
+            }
+            
+            .menu-toggle { 
+                display: flex; 
+            }
+
+            /* Transforms horizontal layout into a clean responsive dropdown drawer */
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-card);
+                border-bottom: 2px solid var(--border-color);
+                padding: 2rem 0;
+                align-items: center;
+                gap: 2rem;
+                opacity: 0;
+                transform: translateY(-20px);
+                pointer-events: none;
+            }
+
+            /* Triggers menu dynamic appearance */
+            .nav-links.active {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            /* Hamburger Morphing Actions (Three Lines turning into X) */
+            .menu-toggle.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.active .bar:nth-child(2) {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            .menu-toggle.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            section { 
+                padding: 5rem 5% 3rem 5%; 
+            }
+            
+            #home h1 { 
+                font-size: 2.75rem; 
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
     <nav>
-        <div class="logo">SIDDHANT<span></span></div>
+        <div class="logo">SIDDHANT<span>.</span></div>
+        
+        <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About & Education</a></li>
@@ -408,7 +484,6 @@
         </ul>
     </nav>
 
-    <!-- Home/Hero Section -->
     <section id="home">
         <div class="hero-badge">COMPUTER SCIENCE ENGINEER</div>
         <h1>Siddhant Hemagire</h1>
@@ -416,7 +491,6 @@
         <a href="#projects" class="btn">View Engineering Projects</a>
     </section>
 
-    <!-- About & Education Section -->
     <section id="about">
         <h2 class="section-title">About & Education</h2>
         <div class="about-container">
@@ -445,7 +519,6 @@
         </div>
     </section>
 
-    <!-- Technical Skills Section -->
     <section id="skills">
         <h2 class="section-title">Technical Competencies</h2>
         <div class="skills-grid">
@@ -492,12 +565,10 @@
         </div>
     </section>
 
-    <!-- Engineering Projects Section -->
     <section id="projects">
         <h2 class="section-title">Engineering Portfolio</h2>
         <div class="projects-grid">
             
-            <!-- Project 1 -->
             <div class="project-card">
                 <div class="project-header">
                     <div class="project-tech">C / DSA / File Handling</div>
@@ -512,7 +583,6 @@
                 <a href="https://github.com/hemagiresidhant-ui/DSA-Tournament-Management-System" target="_blank" class="project-link">View Repository ↗</a>
             </div>
 
-            <!-- Project 2 -->
             <div class="project-card">
                 <div class="project-header">
                     <div class="project-tech">Java / OOP / Concurrency</div>
@@ -527,7 +597,6 @@
                 <a href="https://github.com/hemagiresidhant-ui/OOPS-Movie-Ticket-Booking-System" target="_blank" class="project-link">View Repository ↗</a>
             </div>
 
-            <!-- Project 3 -->
             <div class="project-card">
                 <div class="project-header">
                     <div class="project-tech">HTML / CSS / Web Design</div>
@@ -545,7 +614,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
         <h2 class="section-title">Get In Touch</h2>
         <div class="contact-container">
@@ -571,10 +639,27 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Siddhant Hemagire. Built using semantic web components.</p>
     </footer>
 
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+        const navMenuLinks = document.querySelector('.nav-links');
+
+        // Toggle mobile drawer and animation on click
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navMenuLinks.classList.toggle('active');
+        });
+
+        // Automatically hide mobile view panel after link click
+        document.querySelectorAll('.nav-links a').forEach(linkItem => {
+            linkItem.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navMenuLinks.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
